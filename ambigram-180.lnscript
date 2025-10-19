@@ -1,0 +1,32 @@
+// Ambigram 180° Rotation Script for Lazy Nezumi Pro
+// Draws a live, upside-down (180° rotated) copy of your stroke.
+
+version 1.0
+name "Ambigram 180 Rotation"
+description "Mirrors your strokes 180° around a center point for ambigram drawing."
+
+param centerX { min -5000, max 5000, default 0, step 1 }
+param centerY { min -5000, max 5000, default 0, step 1 }
+
+beginStroke()
+{
+}
+
+sample(x, y, pressure, tiltX, tiltY)
+{
+    // Compute relative offset from the center
+    float dx = x - centerX;
+    float dy = y - centerY;
+
+    // Rotate 180° (invert both axes)
+    float rx = centerX - dx;
+    float ry = centerY - dy;
+
+    // Draw both original and rotated points
+    drawPoint(x, y, pressure);
+    drawPoint(rx, ry, pressure);
+}
+
+endStroke()
+{
+}
